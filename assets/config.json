@@ -1,0 +1,5 @@
+{
+    "endpoints": {
+        "matchliveUrl": "https://api.stripe.com/v1/customers/{customerId}/sources"
+    }
+}
