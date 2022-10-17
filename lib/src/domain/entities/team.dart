@@ -2,7 +2,7 @@ class Team {
   final int id;
   final String logoUrl;
   final String name;
-  final bool winner;
+  final bool? winner;
   Team({
     required this.id,
     required this.logoUrl,

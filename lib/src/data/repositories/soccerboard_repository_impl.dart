@@ -41,7 +41,9 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
     final body = json.decode(
       utf8.decode(response.bodyBytes),
     );
-
-    return (body as List).map((data) => SoccerMatch.fromJson(data)).toList();
+    
+    return (body['response'] as List)
+        .map((data) => SoccerMatch.fromJson(data))
+        .toList();
   }
 }

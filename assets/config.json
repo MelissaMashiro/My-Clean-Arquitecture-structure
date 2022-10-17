@@ -1,5 +1,5 @@
 {
-    "apiKey": "PUT YOUR API KEY HERE OR IT WILL NOT WORK",
+    "apiKey": "fb12ef36aaca55e1271407b3f9fc20f5",
     "endpoints": {
         "matchliveUrl": "https://v3.football.api-sports.io/fixtures?season=2020&league=39"
     },

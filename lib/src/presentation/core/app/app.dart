@@ -1,7 +1,6 @@
 import 'package:clean_arquitecture_project/src/presentation/core/core.dart';
 import 'package:clean_arquitecture_project/src/presentation/ui/loading_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {

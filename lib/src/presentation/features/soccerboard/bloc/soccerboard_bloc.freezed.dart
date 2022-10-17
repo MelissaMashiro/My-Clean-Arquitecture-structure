@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SoccerboardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() completed,
+    required TResult Function(List<SoccerMatch> allmatches) completed,
     required TResult Function() error,
     required TResult Function() initial,
     required TResult Function() loading,
@@ -26,7 +26,7 @@ mixin _$SoccerboardState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -34,7 +34,7 @@ mixin _$SoccerboardState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -90,6 +90,7 @@ abstract class _$$_CompletedCopyWith<$Res> {
   factory _$$_CompletedCopyWith(
           _$_Completed value, $Res Function(_$_Completed) then) =
       __$$_CompletedCopyWithImpl<$Res>;
+  $Res call({List<SoccerMatch> allmatches});
 }
 
 /// @nodoc
@@ -102,60 +103,89 @@ class __$$_CompletedCopyWithImpl<$Res>
 
   @override
   _$_Completed get _value => super._value as _$_Completed;
+
+  @override
+  $Res call({
+    Object? allmatches = freezed,
+  }) {
+    return _then(_$_Completed(
+      allmatches == freezed
+          ? _value._allmatches
+          : allmatches // ignore: cast_nullable_to_non_nullable
+              as List<SoccerMatch>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Completed implements _Completed {
-  const _$_Completed();
+  const _$_Completed(final List<SoccerMatch> allmatches)
+      : _allmatches = allmatches;
+
+  final List<SoccerMatch> _allmatches;
+  @override
+  List<SoccerMatch> get allmatches {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_allmatches);
+  }
 
   @override
   String toString() {
-    return 'SoccerboardState.completed()';
+    return 'SoccerboardState.completed(allmatches: $allmatches)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Completed);
+        (other.runtimeType == runtimeType &&
+            other is _$_Completed &&
+            const DeepCollectionEquality()
+                .equals(other._allmatches, _allmatches));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_allmatches));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_CompletedCopyWith<_$_Completed> get copyWith =>
+      __$$_CompletedCopyWithImpl<_$_Completed>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() completed,
+    required TResult Function(List<SoccerMatch> allmatches) completed,
     required TResult Function() error,
     required TResult Function() initial,
     required TResult Function() loading,
   }) {
-    return completed();
+    return completed(allmatches);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
   }) {
-    return completed?.call();
+    return completed?.call(allmatches);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (completed != null) {
-      return completed();
+      return completed(allmatches);
     }
     return orElse();
   }
@@ -199,7 +229,12 @@ class _$_Completed implements _Completed {
 }
 
 abstract class _Completed implements SoccerboardState {
-  const factory _Completed() = _$_Completed;
+  const factory _Completed(final List<SoccerMatch> allmatches) = _$_Completed;
+
+  List<SoccerMatch> get allmatches;
+  @JsonKey(ignore: true)
+  _$$_CompletedCopyWith<_$_Completed> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -240,7 +275,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() completed,
+    required TResult Function(List<SoccerMatch> allmatches) completed,
     required TResult Function() error,
     required TResult Function() initial,
     required TResult Function() loading,
@@ -251,7 +286,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -262,7 +297,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -356,7 +391,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() completed,
+    required TResult Function(List<SoccerMatch> allmatches) completed,
     required TResult Function() error,
     required TResult Function() initial,
     required TResult Function() loading,
@@ -367,7 +402,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -378,7 +413,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -472,7 +507,7 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() completed,
+    required TResult Function(List<SoccerMatch> allmatches) completed,
     required TResult Function() error,
     required TResult Function() initial,
     required TResult Function() loading,
@@ -483,7 +518,7 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -494,7 +529,7 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? completed,
+    TResult Function(List<SoccerMatch> allmatches)? completed,
     TResult Function()? error,
     TResult Function()? initial,
     TResult Function()? loading,
@@ -568,17 +603,17 @@ mixin _$SoccerboardEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SoccerboardStarted value) soccerboardStarted,
+    required TResult Function(SoccerboardStarted value) soccerboardStarted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_SoccerboardStarted value)? soccerboardStarted,
+    TResult Function(SoccerboardStarted value)? soccerboardStarted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SoccerboardStarted value)? soccerboardStarted,
+    TResult Function(SoccerboardStarted value)? soccerboardStarted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -602,28 +637,28 @@ class _$SoccerboardEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_SoccerboardStartedCopyWith<$Res> {
-  factory _$$_SoccerboardStartedCopyWith(_$_SoccerboardStarted value,
-          $Res Function(_$_SoccerboardStarted) then) =
-      __$$_SoccerboardStartedCopyWithImpl<$Res>;
+abstract class _$$SoccerboardStartedCopyWith<$Res> {
+  factory _$$SoccerboardStartedCopyWith(_$SoccerboardStarted value,
+          $Res Function(_$SoccerboardStarted) then) =
+      __$$SoccerboardStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SoccerboardStartedCopyWithImpl<$Res>
+class __$$SoccerboardStartedCopyWithImpl<$Res>
     extends _$SoccerboardEventCopyWithImpl<$Res>
-    implements _$$_SoccerboardStartedCopyWith<$Res> {
-  __$$_SoccerboardStartedCopyWithImpl(
-      _$_SoccerboardStarted _value, $Res Function(_$_SoccerboardStarted) _then)
-      : super(_value, (v) => _then(v as _$_SoccerboardStarted));
+    implements _$$SoccerboardStartedCopyWith<$Res> {
+  __$$SoccerboardStartedCopyWithImpl(
+      _$SoccerboardStarted _value, $Res Function(_$SoccerboardStarted) _then)
+      : super(_value, (v) => _then(v as _$SoccerboardStarted));
 
   @override
-  _$_SoccerboardStarted get _value => super._value as _$_SoccerboardStarted;
+  _$SoccerboardStarted get _value => super._value as _$SoccerboardStarted;
 }
 
 /// @nodoc
 
-class _$_SoccerboardStarted implements _SoccerboardStarted {
-  const _$_SoccerboardStarted();
+class _$SoccerboardStarted implements SoccerboardStarted {
+  const _$SoccerboardStarted();
 
   @override
   String toString() {
@@ -633,7 +668,7 @@ class _$_SoccerboardStarted implements _SoccerboardStarted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SoccerboardStarted);
+        (other.runtimeType == runtimeType && other is _$SoccerboardStarted);
   }
 
   @override
@@ -670,7 +705,7 @@ class _$_SoccerboardStarted implements _SoccerboardStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SoccerboardStarted value) soccerboardStarted,
+    required TResult Function(SoccerboardStarted value) soccerboardStarted,
   }) {
     return soccerboardStarted(this);
   }
@@ -678,7 +713,7 @@ class _$_SoccerboardStarted implements _SoccerboardStarted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_SoccerboardStarted value)? soccerboardStarted,
+    TResult Function(SoccerboardStarted value)? soccerboardStarted,
   }) {
     return soccerboardStarted?.call(this);
   }
@@ -686,7 +721,7 @@ class _$_SoccerboardStarted implements _SoccerboardStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SoccerboardStarted value)? soccerboardStarted,
+    TResult Function(SoccerboardStarted value)? soccerboardStarted,
     required TResult orElse(),
   }) {
     if (soccerboardStarted != null) {
@@ -696,6 +731,6 @@ class _$_SoccerboardStarted implements _SoccerboardStarted {
   }
 }
 
-abstract class _SoccerboardStarted implements SoccerboardEvent {
-  const factory _SoccerboardStarted() = _$_SoccerboardStarted;
+abstract class SoccerboardStarted implements SoccerboardEvent {
+  const factory SoccerboardStarted() = _$SoccerboardStarted;
 }

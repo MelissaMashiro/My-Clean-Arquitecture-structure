@@ -1,10 +1,11 @@
 import 'package:clean_arquitecture_project/src/domain/entities/failure.dart';
 import 'package:clean_arquitecture_project/src/domain/entities/server_exception.dart';
+import 'package:clean_arquitecture_project/src/domain/entities/soccer_match.dart';
 import 'package:clean_arquitecture_project/src/domain/repositories/soccerboard_repository.dart';
 import 'package:clean_arquitecture_project/src/domain/usecases/use_case.dart';
 import 'package:dartz/dartz.dart';
 
-class LiveMatchsListUseCase extends UseCase<bool> {
+class LiveMatchsListUseCase extends UseCase<List<SoccerMatch>> {
   LiveMatchsListUseCase({
     required SoccerboardRepository soccerboardRepository,
   }) : _soccerboardRepository = soccerboardRepository;
@@ -12,13 +13,12 @@ class LiveMatchsListUseCase extends UseCase<bool> {
   final SoccerboardRepository _soccerboardRepository;
 
   @override
-  Future<Either<Failure, bool>> call(
+  Future<Either<Failure, List<SoccerMatch>>> call(
       {required Map<String, dynamic> arguments}) async {
     try {
-      await _soccerboardRepository.getLiveMatched(
-      );
+      final result = await _soccerboardRepository.getLiveMatched();
 
-      return const Right(true);
+      return Right(result);
     } on ServerException catch (se) {
       return Left(Failure(
         code: se.code,

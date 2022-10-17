@@ -1,10 +1,11 @@
 class Goal {
- final int away;
-  final int home;
   Goal({
     required this.away,
     required this.home,
   });
+
+  final int? away;
+  final int? home;
 
   factory Goal.fromJson(Map<String, dynamic> json) {
     return Goal(
