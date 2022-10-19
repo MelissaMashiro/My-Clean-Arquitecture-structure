@@ -6,7 +6,7 @@ class SoccerboardMatchListRequest extends NetworkRequest {
     required this.host,
     required String url,
     required String year,
-  }) : super(url: url);
+  }) : super(url: url.replaceFirst('{year}', year));
 
   String host;
   String apiKey;

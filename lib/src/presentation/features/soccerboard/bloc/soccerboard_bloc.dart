@@ -22,7 +22,9 @@ class SoccerboardBloc extends Bloc<SoccerboardEvent, SoccerboardState> {
   Future<void> _getLiveMatchs(event, emit) async {
     emit(const SoccerboardState.loading());
 
-    final result = await _liveMatchsListUseCase.call(arguments: {});
+    final result = await _liveMatchsListUseCase.call(arguments: {
+      _AttributeKeys.year: '2021',
+    });
 
     result.fold(
       (error) async {
@@ -33,4 +35,8 @@ class SoccerboardBloc extends Bloc<SoccerboardEvent, SoccerboardState> {
       },
     );
   }
+}
+
+abstract class _AttributeKeys {
+  static const String year = 'year';
 }

@@ -16,7 +16,8 @@ class LiveMatchsListUseCase extends UseCase<List<SoccerMatch>> {
   Future<Either<Failure, List<SoccerMatch>>> call(
       {required Map<String, dynamic> arguments}) async {
     try {
-      final result = await _soccerboardRepository.getLiveMatched();
+      final result = await _soccerboardRepository.getLiveMatched(
+          year: arguments[_AttributeKeys.year]);
 
       return Right(result);
     } on ServerException catch (se) {
@@ -30,4 +31,8 @@ class LiveMatchsListUseCase extends UseCase<List<SoccerMatch>> {
       );
     }
   }
+}
+
+abstract class _AttributeKeys {
+  static const String year = 'year';
 }

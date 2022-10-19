@@ -24,12 +24,14 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
   final NetworkClient _networkClient;
 
   @override
-  Future<List<SoccerMatch>> getLiveMatched() async {
+  Future<List<SoccerMatch>> getLiveMatched({
+    required String year,
+  }) async {
     final response = await _networkClient.get(
       SoccerboardMatchListRequest(
         apiKey: _apiKey,
         host: _host,
-        year: '2020',
+        year: year,
         url: _endpoints.matchliveUrl,
       ),
     );
@@ -41,7 +43,7 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
     final body = json.decode(
       utf8.decode(response.bodyBytes),
     );
-    
+
     return (body['response'] as List)
         .map((data) => SoccerMatch.fromJson(data))
         .toList();
