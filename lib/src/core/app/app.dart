@@ -1,4 +1,4 @@
-import 'package:clean_arquitecture_project/src/presentation/core/core.dart';
+import 'package:clean_arquitecture_project/src/core/core.dart';
 import 'package:clean_arquitecture_project/src/presentation/ui/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

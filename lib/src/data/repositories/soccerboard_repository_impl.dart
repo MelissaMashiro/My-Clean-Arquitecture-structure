@@ -1,51 +1,71 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:clean_arquitecture_project/src/data/models/client/network_client.dart';
-import 'package:clean_arquitecture_project/src/data/models/request_models/soccerboard_match_list_request.dart';
-import 'package:clean_arquitecture_project/src/domain/entities/endpoints.dart';
+import 'package:clean_arquitecture_project/src/data/datasources/local/soccerboard_local_data_source.dart';
+import 'package:clean_arquitecture_project/src/data/datasources/remote/soccerboard_remote_data_source.dart';
+import 'package:clean_arquitecture_project/src/data/models/network/network_info.dart';
+import 'package:clean_arquitecture_project/src/domain/entities/cache_exception.dart';
+import 'package:clean_arquitecture_project/src/domain/entities/failure.dart';
+import 'package:clean_arquitecture_project/src/domain/entities/server_exception.dart';
 import 'package:clean_arquitecture_project/src/domain/entities/soccer_match.dart';
 import 'package:clean_arquitecture_project/src/domain/repositories/soccerboard_repository.dart';
+import 'package:dartz/dartz.dart';
 
 class SoccerboardRepositoryImpl implements SoccerboardRepository {
+  final NetworkInfo _networkInfo;
+  final SoccerboardLocalDataSource _soccerboardLocalDataSource;
+  final SoccerboardRemoteDataSource _soccerboardRemoteDataSource;
+
   SoccerboardRepositoryImpl({
-    required String apikey,
-    required String host,
-    required Endpoints endpoints,
-    required NetworkClient networkClient,
-  })  : _apiKey = apikey,
-        _host = host,
-        _endpoints = endpoints,
-        _networkClient = networkClient;
-
-  final String _apiKey;
-  final String _host;
-  final Endpoints _endpoints;
-  final NetworkClient _networkClient;
-
+    required soccerboardRemoteDataSource,
+    required soccerboardLocalDataSource,
+    required networkInfo,
+  })  : _networkInfo = networkInfo,
+        _soccerboardLocalDataSource = soccerboardLocalDataSource,
+        _soccerboardRemoteDataSource = soccerboardRemoteDataSource;
   @override
-  Future<List<SoccerMatch>> getLiveMatched({
+  Future<Either<Failure, List<SoccerMatch>>> getLiveMatched({
     required String year,
   }) async {
-    final response = await _networkClient.get(
-      SoccerboardMatchListRequest(
-        apiKey: _apiKey,
-        host: _host,
-        year: year,
-        url: _endpoints.matchliveUrl,
-      ),
-    );
+    if (await _networkInfo.isConnected) {
+      print('--->SI HAY CONECCION');
+      try {
+        final remoteSoccerboardList =
+            await _soccerboardRemoteDataSource.getLiveMatched(year: year);
+        print('--->GUARDANDO EN STORAGE');
 
-    if (response.statusCode != HttpStatus.ok) {
-      throw Exception();
+        remoteSoccerboardList.forEach((soccerMatch) async {
+          await _soccerboardLocalDataSource.store(soccerMatch);
+        });
+
+        return Right(remoteSoccerboardList);
+      } on ServerException catch (se) {
+        return Left(Failure(
+          code: se.code,
+          message: se.message,
+        ));
+      } on Exception catch (_) {
+        return Left(
+          Failure(message: 'Unknown Error'),
+        );
+      }
+    } else {
+      print('--->NO HAY CONECCION');
+
+      try {
+        final localSoccerboardList =
+            await _soccerboardLocalDataSource.getSavedSoccerMatchs();
+        print('--->LISTA SACADA DE STORAGE');
+
+        return Right(localSoccerboardList);
+      } on CacheException {
+        print('--->ERROR SACANDO LISTA DEL STORAGE');
+
+        return Left(
+          Failure(message: 'Error trayendo la Informacion del cache '),
+        );
+      } on Exception catch (_) {
+        return Left(
+          Failure(message: 'Unknown Error'),
+        );
+      }
     }
-
-    final body = json.decode(
-      utf8.decode(response.bodyBytes),
-    );
-
-    return (body['response'] as List)
-        .map((data) => SoccerMatch.fromJson(data))
-        .toList();
   }
 }

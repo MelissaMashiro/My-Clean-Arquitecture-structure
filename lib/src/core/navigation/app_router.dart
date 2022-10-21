@@ -1,4 +1,4 @@
-import 'package:clean_arquitecture_project/src/presentation/core/navigation/named_route.dart';
+import 'package:clean_arquitecture_project/src/core/core.dart';
 import 'package:clean_arquitecture_project/src/presentation/features/soccerboard/soccerboard_screen.dart';
 import 'package:flutter/material.dart';
 

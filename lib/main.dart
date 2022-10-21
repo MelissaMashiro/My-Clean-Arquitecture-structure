@@ -1,7 +1,8 @@
-import 'package:clean_arquitecture_project/src/presentation/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
+
+import 'src/core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

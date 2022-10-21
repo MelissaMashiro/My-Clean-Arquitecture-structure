@@ -1,5 +1,5 @@
+import 'package:clean_arquitecture_project/src/core/core.dart';
 import 'package:clean_arquitecture_project/src/domain/entities/soccer_match.dart';
-import 'package:clean_arquitecture_project/src/presentation/core/core.dart';
 import 'package:clean_arquitecture_project/src/presentation/features/soccerboard/bloc/soccerboard_bloc.dart';
 import 'package:clean_arquitecture_project/src/presentation/features/soccerboard/widgets/goal_stat.dart';
 import 'package:clean_arquitecture_project/src/presentation/features/soccerboard/widgets/match_tile.dart';

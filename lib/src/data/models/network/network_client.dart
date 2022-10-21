@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:clean_arquitecture_project/src/data/models/client/network_logger.dart';
+import 'package:clean_arquitecture_project/src/data/models/network/network_logger.dart';
 import 'package:clean_arquitecture_project/src/data/models/request_models/network_request.dart';
 import 'package:http/http.dart' as http;
 

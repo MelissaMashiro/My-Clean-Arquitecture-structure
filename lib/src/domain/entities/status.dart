@@ -12,6 +12,11 @@ class Status {
       long: json[_AttributeKeys.long],
     );
   }
+
+   Map<String, dynamic> toMap() => {
+        _AttributeKeys.elapsed: elapsedTime,
+        _AttributeKeys.long: long,
+    };
 }
 
 abstract class _AttributeKeys {

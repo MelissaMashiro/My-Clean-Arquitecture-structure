@@ -18,6 +18,13 @@ class Team {
       winner: json[_AttributeKeys.winner],
     );
   }
+
+   Map<String, dynamic> toMap() => {
+        _AttributeKeys.id: id,
+        _AttributeKeys.logo: logoUrl,
+       _AttributeKeys.name: name,
+        _AttributeKeys.winner: winner,
+    };
 }
 
 abstract class _AttributeKeys {

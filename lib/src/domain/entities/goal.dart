@@ -13,6 +13,11 @@ class Goal {
       home: json[_AttributeKeys.home],
     );
   }
+
+   Map<String, dynamic> toMap() => {
+        _AttributeKeys.away: away,
+        _AttributeKeys.home: home, 
+    };
 }
 
 abstract class _AttributeKeys {

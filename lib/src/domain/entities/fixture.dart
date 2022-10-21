@@ -20,6 +20,12 @@ class Fixture {
       ),
     );
   }
+
+  Map<String, dynamic> toMap() => {
+        _AttributeKeys.date: date,
+        _AttributeKeys.id: id,
+        _AttributeKeys.status: status,
+      };
 }
 
 abstract class _AttributeKeys {

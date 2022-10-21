@@ -1,5 +1,6 @@
 {
     "apiKey": "fb12ef36aaca55e1271407b3f9fc20f5",
+    "databaseFileName": "soccerDatabase.db",
     "endpoints": {
         "matchliveUrl": "https://v3.football.api-sports.io/fixtures?season={year}&league=39"
     },

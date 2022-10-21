@@ -1,16 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:clean_arquitecture_project/src/data/models/client/network_client.dart';
+import 'package:clean_arquitecture_project/src/core/core.dart';
+import 'package:clean_arquitecture_project/src/data/datasources/local/soccerboard_local_data_source.dart';
+import 'package:clean_arquitecture_project/src/data/models/network/network_client.dart';
 import 'package:clean_arquitecture_project/src/data/models/json/json_config.dart';
+import 'package:clean_arquitecture_project/src/data/datasources/remote/soccerboard_remote_data_source.dart';
+import 'package:clean_arquitecture_project/src/data/models/network/network_info.dart';
 import 'package:clean_arquitecture_project/src/data/repositories/soccerboard_repository_impl.dart';
 import 'package:clean_arquitecture_project/src/domain/entities/config.dart';
 import 'package:clean_arquitecture_project/src/domain/usecases/soccerboard/live_matchs_list_use_case.dart';
-import 'package:clean_arquitecture_project/src/presentation/core/app/constants.dart';
 import 'package:clean_arquitecture_project/src/presentation/features/soccerboard/bloc/soccerboard_bloc.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
+import 'package:sembast/sembast.dart';
+import 'package:sembast/sembast_io.dart';
 
 abstract class Injector {
   Stream<bool> get initializationStream;
@@ -33,6 +39,7 @@ class DefaultInjector implements Injector {
       StreamController<bool>.broadcast();
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   late Config _config;
+  late Database _database;
   late LiveMatchsListUseCase _liveMatchsListUseCase;
   bool _initialized = false;
 
@@ -68,15 +75,28 @@ class DefaultInjector implements Injector {
         json.decode(configJson),
       );
 
+      _database =
+          await databaseFactoryIo.openDatabase(_config.databaseFileName);
+
       final networkClient = NetworkClient(apiKey: _config.apiKey);
+      final networkInfo = NetworkInfoImpl(Connectivity());
 
       _logger.finest('Creating repositories…');
 
-      final soccerboardRepository = SoccerboardRepositoryImpl(
+      final soccerboardRemoteDataSource = SoccerboardRemoteDataSourceImpl(
         apikey: _config.apiKey,
         host: _config.host,
         endpoints: _config.endpoints,
         networkClient: networkClient,
+      );
+
+      final soccerboardLocalDataSource =
+          SoccerboardLocalDataSourceImpl(database: _database);
+
+      final soccerboardRepository = SoccerboardRepositoryImpl(
+        networkInfo: networkInfo,
+        soccerboardLocalDataSource: soccerboardLocalDataSource,
+        soccerboardRemoteDataSource: soccerboardRemoteDataSource,
       );
 
       _liveMatchsListUseCase = LiveMatchsListUseCase(
