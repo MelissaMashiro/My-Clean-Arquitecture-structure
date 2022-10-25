@@ -1,5 +1,4 @@
 import 'package:clean_arquitecture_project/src/domain/entities/failure.dart';
-import 'package:clean_arquitecture_project/src/domain/entities/server_exception.dart';
 import 'package:clean_arquitecture_project/src/domain/entities/soccer_match.dart';
 import 'package:clean_arquitecture_project/src/domain/repositories/soccerboard_repository.dart';
 import 'package:clean_arquitecture_project/src/domain/usecases/use_case.dart';

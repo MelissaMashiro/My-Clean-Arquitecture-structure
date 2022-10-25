@@ -5,6 +5,7 @@ import 'package:clean_arquitecture_project/src/presentation/features/soccerboard
 import 'package:clean_arquitecture_project/src/presentation/features/soccerboard/widgets/match_tile.dart';
 import 'package:clean_arquitecture_project/src/presentation/features/soccerboard/widgets/team_stat.dart';
 import 'package:clean_arquitecture_project/src/presentation/ui/error_screen.dart';
+import 'package:clean_arquitecture_project/src/presentation/ui/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,31 +32,29 @@ class _SoccerBoardScreenState extends State<SoccerBoardScreen> {
         children: [
           Expanded(
             flex: 2,
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 18.0, vertical: 24.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TeamStat(
-                      team: "Local Team",
-                      logoUrl: allmatches[0].home.logoUrl,
-                      teamName: allmatches[0].home.name,
-                    ),
-                    GoalStat(
-                      expandedTime: allmatches[0].fixture.status.elapsedTime,
-                      homeGoal: allmatches[0].goal.home,
-                      awayGoal: allmatches[0].goal.away,
-                    ),
-                    TeamStat(
-                      team: "Visitor Team",
-                      logoUrl: allmatches[0].away.logoUrl,
-                      teamName: allmatches[0].away.name,
-                    ),
-                  ],
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 18.0, vertical: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TeamStat(
+                    team: "Local Team",
+                    logoUrl: allmatches[0].home.logoUrl,
+                    teamName: allmatches[0].home.name,
+                  ),
+                  GoalStat(
+                    expandedTime: allmatches[0].fixture.status.elapsedTime,
+                    homeGoal: allmatches[0].goal.home,
+                    awayGoal: allmatches[0].goal.away,
+                  ),
+                  TeamStat(
+                    team: "Visitor Team",
+                    logoUrl: allmatches[0].away.logoUrl,
+                    teamName: allmatches[0].away.name,
+                  ),
+                ],
               ),
             ),
           ),
@@ -128,7 +127,7 @@ class _SoccerBoardScreenState extends State<SoccerBoardScreen> {
             return state.when(initial: () {
               return const SizedBox();
             }, loading: () {
-              return const CircularProgressIndicator();
+              return const LoadingScreen();
             }, completed: (matchesList) {
               return _buildBody(matchesList);
             }, error: () {

@@ -25,11 +25,9 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
     required String year,
   }) async {
     if (await _networkInfo.isConnected) {
-      print('--->SI HAY CONECCION');
       try {
         final remoteSoccerboardList =
             await _soccerboardRemoteDataSource.getLiveMatched(year: year);
-        print('--->GUARDANDO EN STORAGE');
 
         remoteSoccerboardList.forEach((soccerMatch) async {
           await _soccerboardLocalDataSource.store(soccerMatch);
@@ -47,16 +45,13 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
         );
       }
     } else {
-      print('--->NO HAY CONECCION');
 
       try {
         final localSoccerboardList =
             await _soccerboardLocalDataSource.getSavedSoccerMatchs();
-        print('--->LISTA SACADA DE STORAGE');
 
         return Right(localSoccerboardList);
       } on CacheException {
-        print('--->ERROR SACANDO LISTA DEL STORAGE');
 
         return Left(
           Failure(message: 'Error trayendo la Informacion del cache '),

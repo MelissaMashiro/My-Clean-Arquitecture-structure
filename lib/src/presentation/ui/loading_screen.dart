@@ -20,7 +20,7 @@ class LoadingScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircularProgressIndicator(),
+                  const CircularProgressIndicator(),
                   const SizedBox(
                     height: Spacing.xlarge,
                   ),
