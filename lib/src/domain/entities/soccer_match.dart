@@ -22,6 +22,18 @@ class SoccerMatch {
       home: Team.fromJson(json[_AttributeKeys.teams][_AttributeKeys.home]),
     );
   }
+
+  factory SoccerMatch.fromSavedJson(Map<String, dynamic> json) {
+    return SoccerMatch(
+      away: Team.fromJson(json[_AttributeKeys.away]),
+      fixture: Fixture.fromJson(json[_AttributeKeys.fixture]),
+      goal: Goal.fromJson(
+        json[_AttributeKeys.goals],
+      ),
+      home: Team.fromJson(json[_AttributeKeys.home]),
+    );
+  }
+
   final Team away;
   final Fixture fixture;
   final Goal goal;
@@ -35,6 +47,21 @@ class SoccerMatch {
       for (dynamic map in list) {
         result.add(
           SoccerMatch.fromJson(map.value),
+        );
+      }
+    }
+
+    return result;
+  }
+
+   static List<SoccerMatch> fromSavedDynamicList(dynamic list) {
+    var result = <SoccerMatch>[];
+
+    if (list != null) {
+      result = [];
+      for (dynamic map in list) {
+        result.add(
+          SoccerMatch.fromSavedJson(map.value),
         );
       }
     }

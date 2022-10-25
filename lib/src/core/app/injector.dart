@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sembast/sembast.dart';
+import 'package:sembast/sembast_io.dart';
 import 'package:clean_arquitecture_project/src/core/core.dart';
 import 'package:clean_arquitecture_project/src/data/datasources/local/soccerboard_local_data_source.dart';
 import 'package:clean_arquitecture_project/src/data/models/network/network_client.dart';
@@ -15,8 +18,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
-import 'package:sembast/sembast.dart';
-import 'package:sembast/sembast_io.dart';
 
 abstract class Injector {
   Stream<bool> get initializationStream;
@@ -75,8 +76,9 @@ class DefaultInjector implements Injector {
         json.decode(configJson),
       );
 
-      _database =
-          await databaseFactoryIo.openDatabase(_config.databaseFileName);
+      final appDocumentDir = await getApplicationDocumentsDirectory();
+      final dbPath = join(appDocumentDir.path, _config.databaseFileName);
+      _database = await databaseFactoryIo.openDatabase(dbPath);
 
       final networkClient = NetworkClient(apiKey: _config.apiKey);
       final networkInfo = NetworkInfoImpl(Connectivity());

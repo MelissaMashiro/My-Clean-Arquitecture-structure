@@ -26,7 +26,7 @@ class SoccerboardLocalDataSourceImpl implements SoccerboardLocalDataSource {
       finder: null,
     );
 
-    return SoccerMatch.fromDynamicList(snapshot);
+    return SoccerMatch.fromSavedDynamicList(snapshot);
   }
 
   @override
