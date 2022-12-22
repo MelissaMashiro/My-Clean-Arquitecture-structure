@@ -12,7 +12,8 @@ void main() {
 
   late MockPostRepository repository;
 
-  setUp(() {
+//setUp() is a function that runs before each test run. 
+ setUp(() {
     repository = MockPostRepository();
 
     liveMatchsListUseCase =
