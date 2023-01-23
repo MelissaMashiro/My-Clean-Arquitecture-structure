@@ -13,6 +13,7 @@ void main() {
   }
 
   group('end-to-end test', () {
+    // ignore: unused_local_variable
     final timeBasedEmail = '${DateTime.now().microsecondsSinceEpoch}@test.com';
 
     testWidgets('Authentication Testing', (WidgetTester tester) async {
@@ -23,7 +24,7 @@ void main() {
 
       tester.printToConsole('Starting authentication');
 
-      await tester.pumpWidget(App());
+      await tester.pumpWidget(const App());
 
       await tester.pumpAndSettle();
 

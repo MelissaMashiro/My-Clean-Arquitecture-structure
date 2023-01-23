@@ -6,6 +6,7 @@ class AppRouter {
   static RouteFactory get generatedRoutes => (RouteSettings settings) {
         ModalRoute? route;
 
+        // ignore: unused_local_variable
         var argumentsMap = settings.arguments as Map<String, dynamic>?;
 
         switch (settings.name) {

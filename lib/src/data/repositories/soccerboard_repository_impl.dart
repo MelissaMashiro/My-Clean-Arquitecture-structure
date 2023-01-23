@@ -29,6 +29,7 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
         final remoteSoccerboardList =
             await _soccerboardRemoteDataSource.getLiveMatched(year: year);
 
+        // ignore: avoid_function_literals_in_foreach_calls
         remoteSoccerboardList.forEach((soccerMatch) async {
           await _soccerboardLocalDataSource.store(soccerMatch);
         });
@@ -45,14 +46,12 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
         );
       }
     } else {
-
       try {
         final localSoccerboardList =
             await _soccerboardLocalDataSource.getSavedSoccerMatchs();
 
         return Right(localSoccerboardList);
       } on CacheException {
-
         return Left(
           Failure(message: 'Error trayendo la Informacion del cache '),
         );
