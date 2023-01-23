@@ -29,6 +29,7 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
         final remoteSoccerboardList =
             await _soccerboardRemoteDataSource.getLiveMatched(year: year);
 
+        // ignore: avoid_function_literals_in_foreach_calls
         remoteSoccerboardList.forEach((soccerMatch) async {
           await _soccerboardLocalDataSource.store(soccerMatch);
         });
