@@ -46,14 +46,12 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
         );
       }
     } else {
-
       try {
         final localSoccerboardList =
             await _soccerboardLocalDataSource.getSavedSoccerMatchs();
 
         return Right(localSoccerboardList);
       } on CacheException {
-
         return Left(
           Failure(message: 'Error trayendo la Informacion del cache '),
         );

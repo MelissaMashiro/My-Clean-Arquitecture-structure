@@ -1,0 +1,43 @@
+/*{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "My-Clean-Arquitecture-structure",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "My-Clean-Arquitecture-structure (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "My-Clean-Arquitecture-structure (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
+*/
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Clean Arq Flutter Dev",
+        "type": "dart",
+        "request": "launch",
+        "program": "lib/main_dev.dart"
+      },
+      {
+        "name": "Clean Arq Flutter Prod",
+        "type": "dart",
+        "request": "launch",
+        "program": "lib/main_prod.dart"
+      }
+    ]
+  }
