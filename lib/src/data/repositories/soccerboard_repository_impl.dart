@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'package:clean_arquitecture_project/src/data/datasources/local/soccerboard_local_data_source.dart';
 import 'package:clean_arquitecture_project/src/data/datasources/remote/soccerboard_remote_data_source.dart';
 import 'package:clean_arquitecture_project/src/data/models/network/network_info.dart';
@@ -29,7 +31,6 @@ class SoccerboardRepositoryImpl implements SoccerboardRepository {
         final remoteSoccerboardList =
             await _soccerboardRemoteDataSource.getLiveMatched(year: year);
 
-        // ignore: avoid_function_literals_in_foreach_calls
         remoteSoccerboardList.forEach((soccerMatch) async {
           await _soccerboardLocalDataSource.store(soccerMatch);
         });
